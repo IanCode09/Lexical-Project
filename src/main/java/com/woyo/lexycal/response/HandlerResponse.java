@@ -61,7 +61,7 @@ public class HandlerResponse {
         }
 
         ErrorResponse<String> errorResponse = new ErrorResponse<>();
-        errorResponse.setCode(HttpServletResponse.SC_NOT_FOUND);
+        errorResponse.setCode(HttpServletResponse.SC_BAD_REQUEST);
         errorResponse.setStatus(STATUS_FAILED);
         errorResponse.setErrorCode(errorCode);
         errorResponse.setMessage(error);
@@ -75,7 +75,7 @@ public class HandlerResponse {
         }
 
         ErrorResponse<String> errorResponse = new ErrorResponse<>();
-        errorResponse.setCode(HttpServletResponse.SC_BAD_REQUEST);
+        errorResponse.setCode(HttpServletResponse.SC_NOT_FOUND);
         errorResponse.setStatus(STATUS_FAILED);
         errorResponse.setErrorCode(errorCode);
         errorResponse.setMessage(error);
