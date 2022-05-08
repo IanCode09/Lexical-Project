@@ -8,6 +8,7 @@ import com.woyo.lexycal.entity.course.CourseCategoryListEntity;
 import com.woyo.lexycal.entity.course.CourseEntity;
 import com.woyo.lexycal.entity.instructor.InstructorEntity;
 import com.woyo.lexycal.repository.course.CourseCategoryListRepository;
+import com.woyo.lexycal.repository.course.CourseCategoryRepository;
 import com.woyo.lexycal.repository.course.CourseRepository;
 import com.woyo.lexycal.service.course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
     @Autowired
     private CourseCategoryListRepository courseCategoryListRepository;
+    @Autowired
+    private CourseCategoryRepository courseCategoryRepository;
 
     @Override
     public CourseDTO getCourseById(Integer courseId) {
