@@ -6,14 +6,12 @@ import com.woyo.lexycal.response.DataResponse;
 import com.woyo.lexycal.response.HandlerResponse;
 import com.woyo.lexycal.service.course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/course", produces = {"application/json"})
@@ -33,5 +31,17 @@ public class CourseController {
         } else {
             HandlerResponse.responseNotFound(response, "404", "Course not found");
         }
+    }
+
+    @GetMapping("")
+    public void getAllCourse(HttpServletRequest request, HttpServletResponse response,
+                             @RequestParam(value = "page", defaultValue = "1") int page,
+                             @RequestParam(value = "limit", defaultValue = "25") int limit) throws IOException {
+
+        List<CourseDTO> courseDTO = courseService.getAllCourse(page, limit);
+
+        DataResponse<List<CourseDTO>> data = new DataResponse<>();
+        data.setData(courseDTO);
+        HandlerResponse.responseSuccessWithData(response, data);
     }
 }

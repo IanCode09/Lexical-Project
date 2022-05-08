@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CourseService {
     CourseDTO getCourseById(Integer courseId);
+    List<CourseDTO> getAllCourse(int page, int limit);
 }

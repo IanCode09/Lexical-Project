@@ -12,8 +12,12 @@ import com.woyo.lexycal.repository.course.CourseCategoryRepository;
 import com.woyo.lexycal.repository.course.CourseRepository;
 import com.woyo.lexycal.service.course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -36,6 +40,16 @@ public class CourseServiceImpl implements CourseService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<CourseDTO> getAllCourse(int page, int limit) {
+        if (page > 0) page = page - 1;
+
+        Pageable pageable = PageRequest.of(page, limit);
+        Page<CourseEntity> courses = courseRepository.findAll(pageable);
+
+        return courses.stream().map(this::convertCourseDTO).collect(Collectors.toList());
     }
 
     public CourseDTO convertCourseDTO(CourseEntity item) {
